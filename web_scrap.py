@@ -188,29 +188,6 @@ plotCloud(pos_text)
 plotCloud(neu_text)
 plotCloud(neg_text)
 
-
-
-# %%%% split data into train and test
-'''
-from sklearn.model_selection import StratifiedShuffleSplit
-
-
-sss = StratifiedShuffleSplit(n_splits=5, test_size=0.2)
-for train_index, test_index in sss.split(reviews_df['review_text'],
-                                           reviews_df["sentiment"]): 
-    train = reviews_df.reindex(train_index)
-    test = reviews_df.reindex(test_index)
-
-print(len(train))
-print(train["sentiment"].value_counts()/len(train))
-print(len(test))
-print(test["sentiment"].value_counts()/len(test))
-
-X_train = train["review_text"]
-Y_train = train["sentiment"]
-X_test = test["review_text"]
-Y_test = test["sentiment"]
-'''
 # %%%% Split data to train and test set
 
 # Assign random number 
@@ -223,12 +200,7 @@ X_train = train["review_text"]
 Y_train = train["sentiment"]
 X_test = test["review_text"]
 Y_test = test["sentiment"]
-'''
-print(len(train))
-print(train["sentiment"].value_counts()/len(train))
-print(len(test))
-print(test["sentiment"].value_counts()/len(test))
-'''
+
 # %%%% create bag of words
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.pipeline import Pipeline
@@ -286,100 +258,6 @@ for key, value in modelDict.items():
     print(key)
     modelPredictNew(value)   
     
-    
-    
-    
-    
-'''    
-modelPredict(MultinomialNB())
-modelPredict(LogisticRegression())
-modelPredict(LinearSVC())
-modelPredict(DecisionTreeClassifier())
-modelPredict(RandomForestClassifier())
-modelPredict(MLPClassifier())
-
-
-# naive bayes
-from sklearn.naive_bayes import MultinomialNB
-clf_multiNB_pipe = Pipeline([("vect", CountVectorizer()), 
-                             ("clf_nominalNB", MultinomialNB())])
-clf_multiNB_pipe.fit(X_train, Y_train)
-
-predictedMultiNB = clf_multiNB_pipe.predict(X_test)
-np.mean(predictedMultiNB == Y_test)
-
-confusion_matrix(predictedMultiNB, Y_test)
-print(classification_report(predictedMultiNB, Y_test))
-
-# logistic
-from sklearn.linear_model import LogisticRegression
-clf_logReg_pipe = Pipeline([("vect", CountVectorizer()), 
-                            ("clf_logReg", LogisticRegression())])
-clf_logReg_pipe.fit(X_train, Y_train)
-
-predictedLogReg = clf_logReg_pipe.predict(X_test)
-np.mean(predictedLogReg == Y_test)
-
-confusion_matrix(predictedLogReg, Y_test)
-print(classification_report(predictedLogReg, Y_test))
-
-#SVM
-from sklearn.svm import LinearSVC
-clf_linearSVC_pipe = Pipeline([("vect", CountVectorizer()), 
-                               
-                               ("clf_linearSVC", LinearSVC())])
-clf_linearSVC_pipe.fit(X_train, Y_train)
-
-predictedLinearSVC = clf_linearSVC_pipe.predict(X_test)
-np.mean(predictedLinearSVC == Y_test)
-
-confusion_matrix(predictedLinearSVC, Y_test)
-print(classification_report(predictedLinearSVC, Y_test))
-
-# decision tree
-from sklearn.tree import DecisionTreeClassifier
-clf_decisionTree_pipe = Pipeline([("vect", CountVectorizer()), 
-                                  
-                                  ("clf_decisionTree", DecisionTreeClassifier())
-                                 ])
-clf_decisionTree_pipe.fit(X_train, Y_train)
-
-predictedDecisionTree = clf_decisionTree_pipe.predict(X_test)
-np.mean(predictedDecisionTree == Y_test)
-
-confusion_matrix(predictedDecisionTree, Y_test)
-print(classification_report(predictedDecisionTree, Y_test))
-
-#random forest
-from sklearn.ensemble import RandomForestClassifier
-clf_randomForest_pipe = Pipeline([("vect", CountVectorizer()), 
-                                  
-                                  ("clf_randomForest", RandomForestClassifier())
-                                 ])
-clf_randomForest_pipe.fit(X_train, Y_train)
-
-predictedRandomForest = clf_randomForest_pipe.predict(X_test)
-np.mean(predictedRandomForest == Y_test)
-
-confusion_matrix(predictedRandomForest, Y_test)
-print(classification_report(predictedRandomForest, Y_test))
-
-# neural net
-from sklearn.neural_network import MLPClassifier
-clf_neuralNets_pipe = Pipeline([("vect", CountVectorizer()), 
-                                  
-                                  ("clf_neuralNets", MLPClassifier())
-                                 ])
-clf_neuralNets_pipe.fit(X_train, Y_train)
-
-predictedNeuralNets = clf_neuralNets_pipe.predict(X_test)
-np.mean(predictedNeuralNets == Y_test)
-
-confusion_matrix(predictedNeuralNets, Y_test)
-print(classification_report(predictedNeuralNets, Y_test))
-'''
-
-
 
 
 
